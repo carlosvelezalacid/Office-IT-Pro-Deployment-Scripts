@@ -1320,7 +1320,8 @@ Function GetScriptRoot() {
      if ($PSScriptRoot) {
        $scriptPath = $PSScriptRoot
      } else {
-       $scriptPath = (Get-Item -Path ".\").FullName
+       # $scriptPath = (Get-Item -Path ".\").FullName 	# This not work when run the script from elevated level (cmd runas Administrator)
+       $scriptPath = Split-Path $script:MyInvocation.MyCommand.Path	# This method always works fine
      }
 
      return $scriptPath
